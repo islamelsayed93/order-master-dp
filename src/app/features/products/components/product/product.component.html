@@ -1,15 +1,19 @@
-<div class="row">
-    @for (prod of products; track prod.ProductId) {
-    <div class="col-12 col-md-6 col-lg-4">
-        <div class="card product" style="width: 18rem;">
-            <img [src]="prod.ProductImg" class="card-img-top" alt="...">
+<div class="row mt-5">
+    @for (product of products; track product.ProductId) {
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card product" [class.low-quantity]="product.AvailablePieces < 5">
+            <img [src]="product.ProductImg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title"> {{prod.ProductName}} </h5>
-                <p class="card-text">{{prod.ProductPrice}}</p>
-                <a href="#" class="btn btn-primary">View Details</a>
+                <h5 class="card-title"> {{product.ProductName}} </h5>
+                <p class="card-text">
+                    Price: {{product.ProductPrice}} (Quantity: {{ product.AvailablePieces }})
+                </p>
+                <div class="d-flex">
+                    <button *ngIf="product.AvailablePieces < 5" class="btn btn-danger">Edit</button>
+                    <button class="btn btn-primary">View Details</button>
+                </div>
             </div>
         </div>
     </div>
     }
-
 </div>
